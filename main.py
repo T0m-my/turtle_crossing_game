@@ -15,6 +15,7 @@ def quit_game():
 
 
 tim = Player()
+FINISH_LINE_Y = 280
 car = CarManager()
 cars = []
 cars.append(car)
@@ -31,9 +32,17 @@ while game_is_on:
 
     for car in cars:
         car.move()
+
+        # stop game if car hits turtle player
         if car.distance(tim) < 20:
             game_is_on = False
             break
+
+        # Detect when turtle player crosses finish line, return player to starting position and increase cars' speed
+        if tim.ycor() >= FINISH_LINE_Y:
+            tim.start_pos()
+            car.increase_speed()
+            print(car.move_distance)
 
     if counter == 0:
         counter = 6

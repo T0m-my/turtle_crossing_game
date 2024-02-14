@@ -32,3 +32,6 @@ class CarManager(Turtle):
     def move(self):
         self.forward(self.move_distance)
 
+    def increase_speed(self):
+        self.move_distance += MOVE_INCREMENT
+
