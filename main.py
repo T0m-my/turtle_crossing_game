@@ -14,12 +14,26 @@ def quit_game():
     game_is_on = False
 
 
+tim = Player()
+car = CarManager()
+cars = []
+cars.append(car)
+
 screen.listen()
 screen.onkey(quit_game, key='q')
-
-tim = Player()
+screen.onkey(tim.move, 'Up')
 
 game_is_on = True
+counter = 6
 while game_is_on:
     time.sleep(0.1)
     screen.update()
+
+    for car in cars:
+        car.move()
+
+    if counter == 0:
+        counter = 6
+        new_car = CarManager()
+        cars.append(new_car)
+    counter -= 1
