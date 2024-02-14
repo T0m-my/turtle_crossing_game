@@ -31,9 +31,14 @@ while game_is_on:
 
     for car in cars:
         car.move()
+        if car.distance(tim) < 20:
+            game_is_on = False
+            break
 
     if counter == 0:
         counter = 6
         new_car = CarManager()
         cars.append(new_car)
     counter -= 1
+
+screen.exitonclick()
