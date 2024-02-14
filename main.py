@@ -14,15 +14,15 @@ def quit_game():
     game_is_on = False
 
 
-tim = Player()
-FINISH_LINE_Y = 280
+turtle_player = Player()
+scoreboard = Scoreboard()
 car = CarManager()
 cars = []
 cars.append(car)
 
 screen.listen()
 screen.onkey(quit_game, key='q')
-screen.onkey(tim.move, 'Up')
+screen.onkey(turtle_player.move_up, 'Up')
 
 game_is_on = True
 counter = 6
@@ -34,16 +34,18 @@ while game_is_on:
         car.move()
 
         # stop game if car hits turtle player
-        if car.distance(tim) < 20:
+        if car.distance(turtle_player) < 20:
+            scoreboard.game_over()
             game_is_on = False
-            break
 
         # Detect when turtle player crosses finish line, return player to starting position and increase cars' speed
-        if tim.ycor() >= FINISH_LINE_Y:
-            tim.start_pos()
+        if turtle_player.is_at_finish_line():
+            scoreboard.increase_level()
+            turtle_player.start_pos()
             car.increase_speed()
-            print(car.move_distance)
+            # print(car.car_speed)
 
+    # create a new car on every 6th iteration
     if counter == 0:
         counter = 6
         new_car = CarManager()

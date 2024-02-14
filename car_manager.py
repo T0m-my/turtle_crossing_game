@@ -16,8 +16,7 @@ class CarManager(Turtle):
         self.penup()
         self.create_car()
         self.position_car()
-        self.move_distance = STARTING_MOVE_DISTANCE
-        self.move_increment = MOVE_INCREMENT
+        self.car_speed = STARTING_MOVE_DISTANCE
 
     def create_car(self):
         self.shape('square')
@@ -30,8 +29,8 @@ class CarManager(Turtle):
         self.goto(STARTING_X, y_cor)
 
     def move(self):
-        self.forward(self.move_distance)
+        self.forward(self.car_speed)
 
     def increase_speed(self):
-        self.move_distance += MOVE_INCREMENT
+        self.car_speed += MOVE_INCREMENT
 
